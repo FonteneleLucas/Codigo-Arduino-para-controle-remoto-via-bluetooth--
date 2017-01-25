@@ -5,6 +5,7 @@ SoftwareSerial BTSerial(10, 11); // RX | TX
 int pinMotors[] = {4, 5, 7, 6};
 //                EF, ET, DF, DT
 int velocidade = 100;
+
 void setup() {
   Serial.begin(9600);
   BTSerial.setTimeout(2);
@@ -18,18 +19,17 @@ void loop() {
   while (BTSerial.available() > 0) {
     String conteudo = BTSerial.readString();
     go(0,0);
-    Serial.println(conteudo);
+    //Serial.println(conteudo);
     int velocidadeInput = conteudo.toInt();
     if (velocidadeInput > 0) {
       Serial.println(velocidadeInput);
       velocidade = velocidadeInput;
       Serial.println(velocidade);
     } else {
-      Serial.println("Comando normal");
+      //Serial.println("Comando normal");
       if (conteudo == "F") {
         go(velocidade, velocidade);
         Serial.println("Frente");
-        Serial.println(velocidade);
       } else if (conteudo == "B") {
         go(-velocidade, -velocidade);
         Serial.println("Tras");
